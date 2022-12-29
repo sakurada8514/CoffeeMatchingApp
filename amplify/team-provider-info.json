@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-coffeematchingapp-dev-175027-authRole",
+      "UnauthRoleArn": "arn:aws:iam::909901959299:role/amplify-coffeematchingapp-dev-175027-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::909901959299:role/amplify-coffeematchingapp-dev-175027-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-coffeematchingapp-dev-175027-deployment",
+      "UnauthRoleName": "amplify-coffeematchingapp-dev-175027-unauthRole",
+      "StackName": "amplify-coffeematchingapp-dev-175027",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:909901959299:stack/amplify-coffeematchingapp-dev-175027/d8194ca0-8755-11ed-a4a7-066480c7f1a5",
+      "AmplifyAppId": "d6g2bwig8ke8i"
+    }
+  }
+}
