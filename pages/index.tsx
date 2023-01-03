@@ -10,7 +10,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <button className="btn btn-primary">ボタン</button>
+        <button className="btn btn-primary mt-20">ボタン</button>
       </main>
     </>
   );
