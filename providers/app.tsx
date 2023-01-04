@@ -1,6 +1,22 @@
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import i18next from "i18next";
+import * as z from "zod";
+import translation from "zod-i18n-map/locales/ja/zod.json";
+import { zodI18nMap } from "zod-i18n-map";
 import { ThemeProvider } from "./theme";
+
+i18next.init({
+  lng: "ja",
+  resources: {
+    ja: { zod: translation },
+  },
+  interpolation: {
+    skipOnVariables: false,
+  },
+});
+z.z.setErrorMap(zodI18nMap);
+
 const ErrorFallback = () => {
   return (
     <div
@@ -17,9 +33,11 @@ const ErrorFallback = () => {
     </div>
   );
 };
+
 type AppProviderProps = {
   children: React.ReactNode;
 };
+
 export const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <ThemeProvider theme="light">

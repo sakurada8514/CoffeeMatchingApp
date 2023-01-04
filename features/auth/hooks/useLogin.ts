@@ -15,11 +15,11 @@ export const useLogin = () => {
         return true;
       })
       .catch((e) => {
-        console.log(e);
-
-        setError(
-          "ログインに失敗しました。メールアドレスまたはパスワードが違います。"
-        );
+        if (e.code !== "NotAuthorizedException")
+          setError(
+            "サーバーエラーが発生しています。時間をおいて再度お試しください。"
+          );
+        setError("メールアドレスまたはパスワードが違います。");
         return false;
       });
     setIsLoading(false);
