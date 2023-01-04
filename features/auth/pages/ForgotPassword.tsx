@@ -14,8 +14,11 @@ export const ForgotPassword = () => {
     <Layout title="パスワード再設定">
       <>
         <ForgotPasswordForm
-          onSuccess={() => {
-            router.push("/password/reset");
+          onSuccess={(email) => {
+            router.push({
+              pathname: "/password/reset",
+              query: { email },
+            });
           }}
         />
         <div className="mt-4 flex items-center justify-center">

@@ -12,7 +12,7 @@ type ForgotPasswordValues = {
   email: string;
 };
 type ForgotPasswordFormProps = {
-  onSuccess: () => void;
+  onSuccess: (email: string) => void;
 };
 export const ForgotPasswordForm = ({ onSuccess }: ForgotPasswordFormProps) => {
   const { error, isLoading, handleForgotPassword } = useForgotPassword();
@@ -20,7 +20,7 @@ export const ForgotPasswordForm = ({ onSuccess }: ForgotPasswordFormProps) => {
     <Form<ForgotPasswordValues, typeof schema>
       onSubmit={async (values) => {
         const result = await handleForgotPassword(values.email);
-        if (result) onSuccess();
+        if (result) onSuccess(values.email);
       }}
       schema={schema}
     >
