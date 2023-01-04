@@ -1,11 +1,7 @@
 import { Login } from "features/auth";
 
 const LoginPage = () => {
-  return (
-    <main>
-      <Login />
-    </main>
-  );
+  return <Login />;
 };
 
 export default LoginPage;

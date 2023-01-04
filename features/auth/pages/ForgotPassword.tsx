@@ -1,29 +1,27 @@
 import { TextLink } from "components/Elements/Link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { ForgotPasswordForm } from "../components/ForgotPasswordForm";
 import { Layout } from "../components/Layout";
-import { LoginForm } from "../components/LoginForm";
 
-export const Login = () => {
+export const ForgotPassword = () => {
   const router = useRouter();
   useEffect(() => {
-    router.prefetch("/");
+    router.prefetch("/password/reset");
   }, []);
 
   return (
-    <Layout title="ログイン">
+    <Layout title="パスワード再設定">
       <>
-        <LoginForm
+        <ForgotPasswordForm
           onSuccess={() => {
-            router.push("/");
+            router.push("/password/reset");
           }}
         />
         <div className="mt-4 flex items-center justify-center">
           <TextLink href="/signup">新規登録</TextLink>
           <span className="mx-4 text-gray-500">/</span>
-          <TextLink href="/password/forgot">
-            パスワードを忘れた方はこちら
-          </TextLink>
+          <TextLink href="/login">ログイン</TextLink>
         </div>
       </>
     </Layout>
