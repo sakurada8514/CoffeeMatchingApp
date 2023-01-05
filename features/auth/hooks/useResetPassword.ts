@@ -1,22 +1,23 @@
-import { login } from "lib/auth";
+import { resetPassword } from "lib/auth";
 import { useState } from "react";
 
-export const useLogin = () => {
+export const useResetPassword = () => {
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleLogin = async (
+  const handleResetPassword = async (
     email: string,
-    password: string
+    code: string,
+    newPassword: string
   ): Promise<boolean> => {
     setIsLoading(true);
-    const result = await login(email, password)
+    const result = await resetPassword(email, code, newPassword)
       .then(() => {
         return true;
       })
       .catch((e) => {
-        if (e.code === "NotAuthorizedException") {
-          setError("メールアドレスまたはパスワードが違います。");
+        if (e.code === "CodeMismatchException") {
+          setError("認証コードが一致しません。メールを再度ご確認ください。");
           return false;
         }
         setError(
@@ -29,5 +30,5 @@ export const useLogin = () => {
     return result;
   };
 
-  return { error, isLoading, handleLogin };
+  return { error, isLoading, handleResetPassword };
 };

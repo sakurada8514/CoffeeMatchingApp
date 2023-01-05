@@ -29,7 +29,7 @@ export const ForgotPasswordForm = ({ onSuccess }: ForgotPasswordFormProps) => {
           {error && <ErrorAlert>{error}</ErrorAlert>}
           <InputField
             type="text"
-            label="Email Address"
+            label="メールアドレス"
             error={formState.errors["email"]}
             registration={register("email")}
           />

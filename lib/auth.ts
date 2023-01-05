@@ -7,3 +7,7 @@ export const login = async (email: string, password: string) => {
 export const forgotPassword = async (email: string) => {
   return await Auth.forgotPassword(email);
 };
+
+export const resetPassword = async (email, code, newPassword) => {
+  return await Auth.forgotPasswordSubmit(email, code, newPassword);
+};

@@ -2,12 +2,16 @@ import { ErrorAlert } from "components/Elements/Alert/ErrorAlert";
 import { Button } from "components/Elements/Button";
 import { Form } from "components/Form/Form";
 import { InputField } from "components/Form/InputField";
+import { REGEX, VALIDATION_MESSAGE } from "config/validation";
 import * as z from "zod";
 import { useLogin } from "../hooks/useLogin";
 
 const schema = z.object({
   email: z.string().email(),
-  password: z.string().min(1, "必須項目です。"),
+  password: z
+    .string()
+    .min(1, VALIDATION_MESSAGE.require)
+    .regex(REGEX.password, VALIDATION_MESSAGE.password),
 });
 type LoginValues = {
   email: string;
@@ -37,13 +41,13 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
           )}
           <InputField
             type="text"
-            label="Email Address"
+            label="メールアドレス"
             error={formState.errors["email"]}
             registration={register("email")}
           />
           <InputField
             type="password"
-            label="Password"
+            label="パスワード"
             error={formState.errors["password"]}
             registration={register("password")}
           />

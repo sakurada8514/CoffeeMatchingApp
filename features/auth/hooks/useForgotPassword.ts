@@ -12,13 +12,13 @@ export const useForgotPassword = () => {
         return true;
       })
       .catch((e) => {
-        if (e.code !== "UserNotFoundException") {
-          setError(
-            "サーバーエラーが発生しています。時間をおいて再度お試しください。"
-          );
-          return false;
+        if (e.code === "UserNotFoundException") {
+          return true;
         }
-        return true;
+        setError(
+          "サーバーエラーが発生しています。時間をおいて再度お試しください。"
+        );
+        return false;
       });
     setIsLoading(false);
 
