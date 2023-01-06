@@ -1,6 +1,7 @@
 import { TextLink } from "components/Elements/Link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useNotificationStore } from "stores/notifications";
 import { Layout } from "../components/Layout";
 import { ResetPasswordForm } from "../components/ResetPasswordForm";
 
@@ -17,6 +18,11 @@ export const ResetPassword = () => {
       }
       setEmail(email);
     }
+    useNotificationStore.getState().addNotification({
+      type: "error",
+      title: "Error",
+      message: "サーバーエラーが発生しました。時間をおいて再度お試しください。",
+    });
   }, [router]);
 
   return (

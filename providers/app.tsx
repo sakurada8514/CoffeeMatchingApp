@@ -5,6 +5,7 @@ import * as z from "zod";
 import translation from "zod-i18n-map/locales/ja/zod.json";
 import { zodI18nMap } from "zod-i18n-map";
 import { ThemeProvider } from "./theme";
+import { Notifications } from "components/Notifications/Notifications";
 
 i18next.init({
   lng: "ja",
@@ -49,6 +50,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         }
       >
         <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Notifications />
           {children}
         </ErrorBoundary>
       </Suspense>
