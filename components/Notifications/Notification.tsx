@@ -1,5 +1,7 @@
 import { ErrorAlert } from "components/Elements/Alert/ErrorAlert";
 import { InfoAlert } from "components/Elements/Alert/InfoAlert";
+import { SuccessAlert } from "components/Elements/Alert/SuccessAlert";
+import { WarningAlert } from "components/Elements/Alert/WarningAlert";
 import { ReactNode } from "react";
 
 export type NotificationProps = {
@@ -14,6 +16,12 @@ export type NotificationProps = {
 
 const NotificationTypes = {
   info: (children: ReactNode) => <InfoAlert withOutIcon>{children}</InfoAlert>,
+  success: (children: ReactNode) => (
+    <SuccessAlert withOutIcon>{children}</SuccessAlert>
+  ),
+  warning: (children: ReactNode) => (
+    <WarningAlert withOutIcon>{children}</WarningAlert>
+  ),
   error: (children: ReactNode) => (
     <ErrorAlert withOutIcon>{children}</ErrorAlert>
   ),

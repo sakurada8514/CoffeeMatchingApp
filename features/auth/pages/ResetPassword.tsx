@@ -18,11 +18,6 @@ export const ResetPassword = () => {
       }
       setEmail(email);
     }
-    useNotificationStore.getState().addNotification({
-      type: "error",
-      title: "Error",
-      message: "サーバーエラーが発生しました。時間をおいて再度お試しください。",
-    });
   }, [router]);
 
   return (
