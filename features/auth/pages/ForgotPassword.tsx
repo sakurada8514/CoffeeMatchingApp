@@ -1,7 +1,7 @@
 import { TextLink } from "components/Elements/Link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { ForgotPasswordForm } from "../components/ForgotPasswordForm";
+import { ForgotPasswordForm } from "../components/Form/ForgotPasswordForm";
 import { Layout } from "../components/Layout";
 
 export const ForgotPassword = () => {

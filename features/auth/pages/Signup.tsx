@@ -2,28 +2,24 @@ import { TextLink } from "components/Elements/Link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Layout } from "../components/Layout";
-import { LoginForm } from "../components/Form/LoginForm";
+import { SignupForm } from "../components/Form/SignupForm";
 
-export const Login = () => {
+export const Signup = () => {
   const router = useRouter();
   useEffect(() => {
-    router.prefetch("/");
+    router.prefetch("/login");
   }, []);
 
   return (
-    <Layout title="ログイン">
+    <Layout title="新規登録">
       <>
-        <LoginForm
+        <SignupForm
           onSuccess={() => {
             router.push("/");
           }}
         />
         <div className="mt-4 flex items-center justify-center">
-          <TextLink href="/signup">新規登録</TextLink>
-          <span className="mx-4 text-gray-500">/</span>
-          <TextLink href="/password/forgot">
-            パスワードを忘れた方はこちら
-          </TextLink>
+          <TextLink href="/login">ログイン</TextLink>
         </div>
       </>
     </Layout>

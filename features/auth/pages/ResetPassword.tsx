@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useNotificationStore } from "stores/notifications";
 import { Layout } from "../components/Layout";
-import { ResetPasswordForm } from "../components/ResetPasswordForm";
+import { ResetPasswordForm } from "../components/Form/ResetPasswordForm";
 
 export const ResetPassword = () => {
   const router = useRouter();

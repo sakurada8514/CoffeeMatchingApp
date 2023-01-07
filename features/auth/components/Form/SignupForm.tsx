@@ -1,15 +1,16 @@
 import { ErrorAlert } from "components/Elements/Alert/ErrorAlert";
-import { InfoAlert } from "components/Elements/Alert/InfoAlert";
 import { Button } from "components/Elements/Button";
 import { Form } from "components/Form/Form";
 import { InputField } from "components/Form/InputField";
 import { REGEX, VALIDATION_MESSAGE } from "config/validation";
+import { useSignup } from "features/auth/hooks/useSignup";
 import * as z from "zod";
-import { useResetPassword } from "../hooks/useResetPassword";
+import { useLogin } from "../../hooks/useLogin";
 
 const schema = z
   .object({
-    code: z.string().min(1, VALIDATION_MESSAGE.require),
+    name: z.string().min(1, VALIDATION_MESSAGE.require),
+    email: z.string().email(),
     password: z
       .string()
       .min(1, VALIDATION_MESSAGE.require)
@@ -26,48 +27,45 @@ const schema = z
     }
   });
 
-type ResetPasswordValues = {
-  code: string;
+type SignupValues = {
+  name: string;
+  email: string;
   password: string;
   passwordConfirm: string;
 };
-type ResetPasswordFormProps = {
+type SignupFormProps = {
   onSuccess: () => void;
-  email: string;
 };
-export const ResetPasswordForm = ({
-  onSuccess,
-  email,
-}: ResetPasswordFormProps) => {
-  const { error, isLoading, handleResetPassword } = useResetPassword();
+export const SignupForm = ({ onSuccess }: SignupFormProps) => {
+  const { error, isLoading, handleSignup } = useSignup();
   return (
-    <Form<ResetPasswordValues, typeof schema>
+    <Form<SignupValues, typeof schema>
       onSubmit={async (values) => {
-        const result = await handleResetPassword(
-          email,
-          values.code,
-          values.password
-        );
+        const result = await handleSignup(values.email, values.password);
         if (result) onSuccess();
       }}
       schema={schema}
     >
       {({ register, formState }) => (
         <>
-          {error ? (
-            <ErrorAlert>{error}</ErrorAlert>
-          ) : (
-            <InfoAlert>
-              ご登録のメールアドレスに認証コードを送信しました。
+          {error && (
+            <ErrorAlert>
+              登録に失敗しました。
               <br />
-              認証コードを入力しパスワードを再設定してください。
-            </InfoAlert>
+              {error}
+            </ErrorAlert>
           )}
           <InputField
             type="text"
-            label="認証コード"
-            error={formState.errors["code"]}
-            registration={register("code")}
+            label="ユーザーネーム"
+            error={formState.errors["name"]}
+            registration={register("name")}
+          />
+          <InputField
+            type="text"
+            label="メールアドレス"
+            error={formState.errors["email"]}
+            registration={register("email")}
           />
           <InputField
             type="password"
@@ -89,7 +87,7 @@ export const ResetPasswordForm = ({
               isLoading={isLoading}
               wfull
             >
-              再設定
+              登録
             </Button>
           </div>
         </>
