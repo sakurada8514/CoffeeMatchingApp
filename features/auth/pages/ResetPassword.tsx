@@ -20,15 +20,18 @@ export const ResetPassword = () => {
     }
   }, [router]);
 
+  const onSuccess = () => {
+    useNotificationStore.getState().addNotification({
+      type: "success",
+      title: "Success",
+      message: "パスワード再設定が完了しました。",
+    });
+    router.push("/login");
+  };
   return (
     <Layout title="パスワード再設定">
       <>
-        <ResetPasswordForm
-          onSuccess={() => {
-            router.push("/login");
-          }}
-          email={email}
-        />
+        <ResetPasswordForm onSuccess={onSuccess} email={email} />
         <div className="mt-4 flex items-center justify-center">
           <TextLink href="/signup">新規登録</TextLink>
           <span className="mx-4 text-gray-500">/</span>

@@ -15,10 +15,8 @@ export const useSignup = () => {
         return true;
       })
       .catch((e) => {
-        console.log(e);
-
-        if (e.code === "NotAuthorizedException") {
-          setError("メールアドレスまたはパスワードが違います。");
+        if (e.code === "UsernameExistsException") {
+          setError("既に登録済みのメールアドレスです。");
           return false;
         }
         setError(

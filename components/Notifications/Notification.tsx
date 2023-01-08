@@ -2,7 +2,7 @@ import { ErrorAlert } from "components/Elements/Alert/ErrorAlert";
 import { InfoAlert } from "components/Elements/Alert/InfoAlert";
 import { SuccessAlert } from "components/Elements/Alert/SuccessAlert";
 import { WarningAlert } from "components/Elements/Alert/WarningAlert";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 export type NotificationProps = {
   notification: {
@@ -31,6 +31,12 @@ export const Notification = ({
   notification: { id, type, title, message },
   onDismiss,
 }: NotificationProps) => {
+  useEffect(() => {
+    setTimeout(() => {
+      onDismiss(id);
+    }, 3000);
+  }, []);
+
   return (
     <>
       <div className="toast z-50">
