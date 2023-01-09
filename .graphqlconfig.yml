@@ -1,0 +1,12 @@
+projects:
+  coffeematchingapp:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - graphql/**/*.ts
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: typescript
+        generatedFileName: lib/API.ts
+        docsFilePath: graphql

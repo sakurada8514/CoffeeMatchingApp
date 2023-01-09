@@ -1,0 +1,87 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
+type User @model {
+  id: ID!
+  name: String!
+  userType: UserType!
+  email: String!
+  iconUrl: String
+  address: String
+  recipes: [Recipe!] @hasMany
+  roastLevel: roastLevel @hasOne
+  companyId: ID!
+}
+
+type Company @model {
+  id: ID!
+  name: String!
+  profile: String
+  logoUrl: String
+  companyUrl: String
+  address: String!
+  phoneNumber: String!
+  users: [User!] @hasMany
+  recipes: [Recipe!] @hasMany
+}
+
+type Recipe @model {
+  id: ID!
+  isEnabled: Boolean!
+  title: String!
+  tasteComment: String!
+  rate: Int
+  viewCount: Int!
+  grindLevel: Int # 後でenumへ
+  coffeeWaterRate: String
+  waterTemperature: Int
+  dripperName: String
+  brewTime: String
+  mediaUrl: String
+  originStory: String
+  distributionChannel: String
+  roastDate: AWSDateTime
+  waterDescription: String
+  grinder: String
+}
+
+type Coffee @model {
+  id: ID!
+  region: String!
+  variety: String!
+  processing: Processing
+  recipe: Recipe! @hasOne
+}
+
+type roastLevel @model {
+  id: ID!
+  level: Level!
+  coffee: Coffee @hasOne
+  user: User @hasOne
+}
+
+enum UserType {
+  General
+  Company
+}
+
+enum Processing {
+  Washed
+  Honey
+  Natural
+  Anaerobic
+  Anarobic
+  Carbonic
+  Mercelation
+  Others
+}
+
+enum Level {
+  Light
+  MediumLight
+  Medium
+  MediumDark
+  Dark
+}
