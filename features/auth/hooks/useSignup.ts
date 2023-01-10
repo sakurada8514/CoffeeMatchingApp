@@ -2,10 +2,16 @@ import { createUser } from "graphql/mutations";
 import { CreateUserInput, mutation, UserType } from "lib/API";
 import { signup } from "lib/auth";
 import { useState } from "react";
+import { useUserStore } from "stores/user";
+import { GraphQLResult } from "@aws-amplify/api-graphql";
 
 export const useSignup = () => {
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const isGraphQLResult = (arg: any): arg is GraphQLResult<any> => {
+    return arg.data !== undefined;
+  };
 
   const handleSignup = async (
     name: string,
@@ -22,7 +28,16 @@ export const useSignup = () => {
           userType,
         });
       })
-      .then(() => {
+      .then((mutationResult) => {
+        if (isGraphQLResult(mutationResult)) {
+          useUserStore.getState().addUser({
+            id: mutationResult.data.createUser.id,
+            name: mutationResult.data.createUser.name,
+            email: mutationResult.data.createUser.email,
+            userType: mutationResult.data.createUser.userType,
+          });
+        }
+
         return true;
       })
       .catch((e) => {
