@@ -1,4 +1,6 @@
-import { login, signup } from "lib/auth";
+import { createUser } from "graphql/mutations";
+import { CreateUserInput, mutation, UserType } from "lib/API";
+import { signup } from "lib/auth";
 import { useState } from "react";
 
 export const useSignup = () => {
@@ -6,11 +8,20 @@ export const useSignup = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSignup = async (
+    name: string,
     email: string,
-    password: string
+    password: string,
+    userType: UserType
   ): Promise<boolean> => {
     setIsLoading(true);
     const result = await signup(email, password)
+      .then(() => {
+        return mutation<CreateUserInput>(createUser, {
+          name,
+          email,
+          userType,
+        });
+      })
       .then(() => {
         return true;
       })

@@ -4,6 +4,7 @@ import { Form } from "components/Form/Form";
 import { InputField } from "components/Form/InputField";
 import { REGEX, VALIDATION_MESSAGE } from "config/validation";
 import { useSignup } from "features/auth/hooks/useSignup";
+import { UserType } from "lib/API";
 import * as z from "zod";
 import { useLogin } from "../../hooks/useLogin";
 
@@ -41,7 +42,12 @@ export const SignupForm = ({ onSuccess }: SignupFormProps) => {
   return (
     <Form<SignupValues, typeof schema>
       onSubmit={async (values) => {
-        const result = await handleSignup(values.email, values.password);
+        const result = await handleSignup(
+          values.name,
+          values.email,
+          values.password,
+          UserType.General
+        );
         if (result) onSuccess();
       }}
       schema={schema}

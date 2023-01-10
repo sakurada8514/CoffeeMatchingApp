@@ -34,7 +34,7 @@ export const Notification = ({
   useEffect(() => {
     setTimeout(() => {
       onDismiss(id);
-    }, 3000);
+    }, 5000);
   }, []);
 
   return (

@@ -12,7 +12,7 @@ type User @model {
   address: String
   recipes: [Recipe!] @hasMany
   roastLevel: roastLevel @hasOne
-  companyId: ID!
+  companyId: ID
 }
 
 type Company @model {
