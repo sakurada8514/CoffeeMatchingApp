@@ -6,7 +6,7 @@ import { SignupForm } from "../components/Form/SignupForm";
 import { useNotificationStore } from "stores/notifications";
 import { UserType } from "lib/API";
 
-export const Signup = () => {
+export const CompanySignup = () => {
   const router = useRouter();
   useEffect(() => {
     router.prefetch("/");
@@ -22,13 +22,13 @@ export const Signup = () => {
   };
 
   return (
-    <Layout title="新規登録">
+    <Layout title="企業ユーザー新規登録">
       <>
         <SignupForm onSuccess={onSuccess} userType={UserType.Company} />
         <div className="mt-4 flex items-center justify-center">
           <TextLink href="/login">ログイン</TextLink>
           <span className="mx-4 text-gray-500">/</span>
-          <TextLink href="/company/signup">企業の方はこちら</TextLink>
+          <TextLink href="/signup">一般の方はこちら</TextLink>
         </div>
       </>
     </Layout>

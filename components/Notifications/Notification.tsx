@@ -8,7 +8,7 @@ export type NotificationProps = {
   notification: {
     id: string;
     type: "info" | "warning" | "success" | "error";
-    title: string;
+    title?: string;
     message?: string;
   };
   onDismiss: (id: string) => void;

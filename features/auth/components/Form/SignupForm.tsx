@@ -36,8 +36,9 @@ type SignupValues = {
 };
 type SignupFormProps = {
   onSuccess: () => void;
+  userType: UserType;
 };
-export const SignupForm = ({ onSuccess }: SignupFormProps) => {
+export const SignupForm = ({ onSuccess, userType }: SignupFormProps) => {
   const { error, isLoading, handleSignup } = useSignup();
   return (
     <Form<SignupValues, typeof schema>
@@ -46,7 +47,7 @@ export const SignupForm = ({ onSuccess }: SignupFormProps) => {
           values.name,
           values.email,
           values.password,
-          UserType.General
+          userType
         );
         if (result) onSuccess();
       }}
